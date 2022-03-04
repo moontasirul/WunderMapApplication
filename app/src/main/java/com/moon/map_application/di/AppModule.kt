@@ -1,7 +1,7 @@
 package com.moon.map_application.di
 
+import com.moon.map_application.data.remote.ApiEndPoint.Companion.BASE_URL
 import com.moon.map_application.data.remote.ICarService
-import com.moon.map_application.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
