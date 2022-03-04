@@ -1,6 +1,7 @@
 package com.moon.map_application.data.repository
 
 import com.moon.map_application.data.model.Car
+import com.moon.map_application.data.model.CarInfo
 import com.moon.map_application.data.remote.BaseDataSource
 import com.moon.map_application.data.remote.CarRemoteDataSource
 import com.moon.map_application.utils.Resource
@@ -19,6 +20,12 @@ class AppRepository @Inject constructor(
     suspend fun getCar(): Flow<Resource<Car>> {
         return flow {
             emit(carDataSource.getAllCars())
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getCarDetails(id: Int): Flow<Resource<CarInfo>> {
+        return flow {
+            emit(carDataSource.getCarInfo(id))
         }.flowOn(Dispatchers.IO)
     }
 
