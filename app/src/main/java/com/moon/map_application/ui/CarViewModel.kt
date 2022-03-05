@@ -1,6 +1,9 @@
 package com.moon.map_application.ui
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.moon.map_application.data.model.Car
 import com.moon.map_application.data.model.CarItem
 import com.moon.map_application.data.repository.AppRepository
@@ -18,7 +21,7 @@ class CarViewModel @Inject constructor(
     private val _response: MutableLiveData<Resource<Car>> = MutableLiveData()
     val response: LiveData<Resource<Car>> = _response
 
-    var carList : ArrayList<CarItem> = arrayListOf<CarItem>()
+    var carList: ArrayList<CarItem> = arrayListOf()
 
     fun fetchCarResponse() = viewModelScope.launch {
         repository.getCar().collect { values ->

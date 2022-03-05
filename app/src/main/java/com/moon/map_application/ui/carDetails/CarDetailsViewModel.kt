@@ -19,6 +19,23 @@ class CarDetailsViewModel @Inject constructor(
 
     private val carId = MutableLiveData<Int>()
     var carTitle = MutableLiveData<String>()
+    var carCleanStatus = MutableLiveData<String>()
+    var carDamageStatus = MutableLiveData<String>()
+    var licencePlate = MutableLiveData<String>()
+    var fuelLevel = MutableLiveData<String>()
+    var vehicleStateId = MutableLiveData<String>()
+    var hardwareId = MutableLiveData<String>()
+    var vehicleTypeId = MutableLiveData<String>()
+    var pricingTime = MutableLiveData<String>()
+    var pricingParking = MutableLiveData<String>()
+    var activatedByHardwareStatus = MutableLiveData<String>()
+    var locationId = MutableLiveData<String>()
+    var address = MutableLiveData<String>()
+    var zipCode = MutableLiveData<String>()
+    var city = MutableLiveData<String>()
+    var reservationState = MutableLiveData<String>()
+    var damageDescription = MutableLiveData<String>()
+    var vehicleTypeImage = MutableLiveData<String>()
 
     private val _carResponse: MutableLiveData<Resource<CarInfo>> = MutableLiveData()
     val response: LiveData<Resource<CarInfo>> = _carResponse
@@ -38,9 +55,65 @@ class CarDetailsViewModel @Inject constructor(
         }
     }
 
-    fun setCarData(carInfo: CarInfo) {
+    fun getCarData(carInfo: CarInfo) {
         carInfo.title?.let {
-            carTitle.value = it
+            carTitle.value = "Car Title: $it"
+        }
+        carInfo.isClean?.let {
+            carCleanStatus.value = "Clean Status: ${if (it) "Yes" else "No"}"
+        }
+
+        carInfo.isDamaged?.let {
+            carDamageStatus.value = "Damaged Status: ${if (it) "Yes" else "No"}"
+        }
+
+        carInfo.licencePlate?.let {
+            licencePlate.value = "Licence Plate: $it"
+        }
+
+        carInfo.fuelLevel?.let {
+            fuelLevel.value = "Fuel Level: $it"
+        }
+
+        carInfo.vehicleStateId?.let {
+            vehicleStateId.value = "Vehicle State Id: $it"
+        }
+
+        carInfo.hardwareId?.let {
+            hardwareId.value = "Hardware Id: $it"
+        }
+        carInfo.vehicleTypeId?.let {
+            vehicleTypeId.value = "Vehicle Type Id: $it"
+        }
+        carInfo.pricingTime?.let {
+            pricingTime.value = "Pricing Time: $it"
+        }
+        carInfo.pricingParking?.let {
+            pricingParking.value = "Pricing Parking: $it"
+        }
+        carInfo.isActivatedByHardware?.let {
+            activatedByHardwareStatus.value = "Activated By Hardware: ${if (it) "yes" else "No"}"
+        }
+        carInfo.locationId?.let {
+            locationId.value = "Location Id: $it"
+        }
+        carInfo.address?.let {
+            address.value = "Address: $it"
+        }
+        carInfo.zipCode?.let {
+            zipCode.value = "Zip Code: $it"
+        }
+        carInfo.city?.let {
+            city.value = "City: $it"
+        }
+        carInfo.reservationState?.let {
+            reservationState.value = "Reservation Sate: $it"
+        }
+        carInfo.damageDescription?.let {
+            damageDescription.value = "Damage Description: $it"
+        }
+        carInfo.vehicleTypeImageUrl?.let {
+            vehicleTypeImage.value = it
         }
     }
 }

@@ -50,7 +50,7 @@ class CarDetailsFragment : Fragment() {
                     response.data?.let {
                         print(it)
                         viewModel.isLoading.set(false)
-                        viewModel.setCarData(it)
+                        viewModel.getCarData(it)
                     }
                 }
                 "ERROR" -> {
