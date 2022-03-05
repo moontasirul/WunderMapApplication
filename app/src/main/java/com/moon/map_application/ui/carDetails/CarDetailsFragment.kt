@@ -30,8 +30,9 @@ class CarDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // return inflater.inflate(R.layout.fragment_car_details, container, false)
         carDetailsBinding = FragmentCarDetailsBinding.inflate(layoutInflater)
+        carDetailsBinding.lifecycleOwner = this
+        carDetailsBinding.carDetailsViewModel = viewModel
         return carDetailsBinding.root
     }
 
@@ -41,18 +42,23 @@ class CarDetailsFragment : Fragment() {
     }
 
     private fun setupObservers() {
+        viewModel.isLoading.set(true)
         viewModel.fetchCarDetails()
         viewModel.response.observe(viewLifecycleOwner, Observer { response ->
             when (response.status.name) {
                 "SUCCESS" -> {
                     response.data?.let {
                         print(it)
+                        viewModel.isLoading.set(false)
+                        viewModel.setCarData(it)
                     }
                 }
                 "ERROR" -> {
+                    viewModel.isLoading.set(false)
                     print(response.message)
                 }
                 "LOADING" -> {
+                    viewModel.isLoading.set(true)
                     print(response.message)
                 }
             }

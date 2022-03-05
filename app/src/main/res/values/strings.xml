@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">map_application</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="btn_text_quick_rent">quick-rent</string>
 </resources>
