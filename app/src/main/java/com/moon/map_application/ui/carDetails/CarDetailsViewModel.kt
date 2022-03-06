@@ -153,6 +153,7 @@ class CarDetailsViewModel @Inject constructor(
                         AppEnum.API_CALL_STATUS.SUCCESS.name -> {
                             response.data?.let {
                                 isLoading.set(false)
+                                repository.setReservationData(it)
                                 navigator.showSuccessDialog()
                             }
                         }

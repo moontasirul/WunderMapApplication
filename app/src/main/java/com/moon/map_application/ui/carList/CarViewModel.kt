@@ -3,6 +3,7 @@ package com.moon.map_application.ui.carList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.example.QuickRentalResponse
 import com.moon.map_application.data.model.Car
 import com.moon.map_application.data.model.CarItem
 import com.moon.map_application.data.repository.AppRepository
@@ -22,6 +23,7 @@ class CarViewModel @Inject constructor(
 
     private val _response: MutableLiveData<Resource<Car>> = MutableLiveData()
     val response: LiveData<Resource<Car>> = _response
+
 
     var carList: ArrayList<CarItem> = arrayListOf()
 
@@ -49,5 +51,14 @@ class CarViewModel @Inject constructor(
                 print(response.message)
             }
         }
+    }
+
+
+    fun getReservationData(): QuickRentalResponse? {
+        return repository.getReservationData()
+    }
+
+    fun setReservationData() {
+        repository.removeReservationData()
     }
 }

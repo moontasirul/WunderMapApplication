@@ -1,6 +1,7 @@
 package com.moon.map_application.data.repository
 
 import com.example.example.QuickRentalResponse
+import com.moon.map_application.data.local.prefs.AppPreferences
 import com.moon.map_application.data.model.Car
 import com.moon.map_application.data.model.CarInfo
 import com.moon.map_application.data.model.QuickRentalRequest
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class AppRepository @Inject constructor(
     private var carDataSource: CarRemoteDataSource,
-    private var reservationDataSource: ReservationDataSource
+    private var reservationDataSource: ReservationDataSource,
+    private var preferences: AppPreferences
 ) : BaseDataSource() {
 
     suspend fun getCar(): Flow<Resource<Car>> {
@@ -39,4 +41,15 @@ class AppRepository @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    fun getReservationData(): QuickRentalResponse? {
+        return preferences.quickRentalResponse
+    }
+
+    fun setReservationData(quickRentalResponse: QuickRentalResponse) {
+        preferences.quickRentalResponse = quickRentalResponse
+    }
+
+    fun removeReservationData() {
+        preferences.quickRentalResponse = null
+    }
 }

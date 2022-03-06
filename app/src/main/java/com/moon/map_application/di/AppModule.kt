@@ -1,5 +1,10 @@
 package com.moon.map_application.di
 
+import android.app.Application
+import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.moon.map_application.data.local.prefs.AppPreferences
 import com.moon.map_application.data.remote.ApiEndPoint.Companion.BASE_URL
 import com.moon.map_application.data.remote.ApiEndPoint.Companion.BASE_URL_FOR_RESERVATION
 import com.moon.map_application.data.remote.apiService.ICarService
@@ -19,6 +24,21 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+    @Provides
+    @Singleton
+    internal fun provideContext(application: Application): Context {
+        return application
+    }
+
+    @Provides
+    fun provideGson(): Gson = GsonBuilder().create()
+
+    @Provides
+    @Singleton
+    internal fun provideAppPreferenece(context: Context, mGson: Gson): AppPreferences {
+        return AppPreferences(context, mGson)
+    }
+
     @Singleton
     @Provides
     fun provideHttpClient(): OkHttpClient {

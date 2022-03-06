@@ -11,4 +11,5 @@
     <string name="msg_success">Thanks for the reservation.</string>
     <string name="msg_failed_title">Sorry..!</string>
     <string name="msg_failed">Reservation is unsuccessful</string>
+    <string name="dismiss_dialog_txt">Dismiss dialog</string>
 </resources>
