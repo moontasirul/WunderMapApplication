@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.moon.map_application.data.model.CarInfo
+import com.moon.map_application.data.model.QuickRentalRequest
 import com.moon.map_application.data.repository.AppRepository
 import com.moon.map_application.ui.base.BaseViewModel
 import com.moon.map_application.utils.Resource
@@ -56,6 +57,9 @@ class CarDetailsViewModel @Inject constructor(
     }
 
     fun getCarData(carInfo: CarInfo) {
+        carInfo.carId?.let {
+            carId.value = it
+        }
         carInfo.title?.let {
             carTitle.value = "Car Title: $it"
         }
@@ -114,6 +118,34 @@ class CarDetailsViewModel @Inject constructor(
         }
         carInfo.vehicleTypeImageUrl?.let {
             vehicleTypeImage.value = it
+        }
+    }
+
+
+    fun onClickQuickRent() {
+        isLoading.set(true)
+        viewModelScope.launch {
+            carId.value?.let {
+                repository.setQuickRentalReservation(QuickRentalRequest(it)).collect { response ->
+                    print(response)
+                    when (response.status.name) {
+                        "SUCCESS" -> {
+                            response.data?.let {
+                                print(it)
+                                isLoading.set(false)
+                            }
+                        }
+                        "ERROR" -> {
+                            isLoading.set(false)
+                            print(response.message)
+                        }
+                        "LOADING" -> {
+                            isLoading.set(true)
+                            print(response.message)
+                        }
+                    }
+                }
+            }
         }
     }
 }

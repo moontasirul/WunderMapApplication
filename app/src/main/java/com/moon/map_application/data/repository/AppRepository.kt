@@ -1,9 +1,12 @@
 package com.moon.map_application.data.repository
 
+import com.example.example.QuickRentalResponse
 import com.moon.map_application.data.model.Car
 import com.moon.map_application.data.model.CarInfo
+import com.moon.map_application.data.model.QuickRentalRequest
 import com.moon.map_application.data.remote.BaseDataSource
 import com.moon.map_application.data.remote.CarRemoteDataSource
+import com.moon.map_application.data.remote.ReservationDataSource
 import com.moon.map_application.utils.Resource
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +17,8 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class AppRepository @Inject constructor(
-    private var carDataSource: CarRemoteDataSource
+    private var carDataSource: CarRemoteDataSource,
+    private var reservationDataSource: ReservationDataSource
 ):BaseDataSource() {
 
     suspend fun getCar(): Flow<Resource<Car>> {
@@ -26,6 +30,12 @@ class AppRepository @Inject constructor(
     suspend fun getCarDetails(id: Int): Flow<Resource<CarInfo>> {
         return flow {
             emit(carDataSource.getCarInfo(id))
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun setQuickRentalReservation(quickRentalRequest: QuickRentalRequest): Flow<Resource<QuickRentalResponse>> {
+        return flow {
+            emit(reservationDataSource.setQuickRental(quickRentalRequest))
         }.flowOn(Dispatchers.IO)
     }
 
