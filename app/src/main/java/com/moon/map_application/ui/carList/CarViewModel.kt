@@ -58,7 +58,7 @@ class CarViewModel @Inject constructor(
         return repository.getReservationData()
     }
 
-    fun setReservationData() {
+    fun removeReservationData() {
         repository.removeReservationData()
     }
 }

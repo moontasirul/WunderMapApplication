@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.moon.map_application.R
 import com.moon.map_application.databinding.FragmentCarDetailsBinding
 import com.moon.map_application.utils.dialogUtils.CustomDialogCallback
@@ -89,6 +90,7 @@ class CarDetailsFragment : Fragment(), ICarDetailsNavigator {
 
                 override fun onPositiveClick() {
                     dialog?.dismiss()
+                    findNavController().popBackStack()
                 }
 
                 override fun onCloseClick() {

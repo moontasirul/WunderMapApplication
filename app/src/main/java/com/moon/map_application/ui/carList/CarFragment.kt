@@ -133,7 +133,6 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         permissions: Array<String?>,
         grantResults: IntArray
     ) {
-        // super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             REQUEST_CODE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 fetchLocation()
@@ -277,11 +276,11 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
             bottomSheetBinding.idBtnDismiss.setOnClickListener {
                 dialog.dismiss()
+                viewModel.removeReservationData()
             }
-            dialog.setCancelable(true)
+            dialog.setCancelable(false)
             dialog.setContentView(bottomSheetBinding.root)
             dialog.show()
-
         }
     }
 

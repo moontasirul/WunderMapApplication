@@ -9,6 +9,7 @@ import com.moon.map_application.data.remote.ApiEndPoint.Companion.BASE_URL
 import com.moon.map_application.data.remote.ApiEndPoint.Companion.BASE_URL_FOR_RESERVATION
 import com.moon.map_application.data.remote.apiService.ICarService
 import com.moon.map_application.data.remote.apiService.IReservationService
+import com.moon.map_application.utils.Constants.Companion.ASSESS_TOKEN
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -97,7 +98,7 @@ object AppModule {
                     .addInterceptor { chain ->
                         val request = chain.request().newBuilder().addHeader(
                             "Authorization",
-                            "Bearer df7c313b47b7ef87c64c0f5f5cebd6086bbb0fa"
+                            "Bearer $ASSESS_TOKEN"
                         ).build()
                         chain.proceed(request)
                     }.build()
