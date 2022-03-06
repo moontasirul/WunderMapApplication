@@ -15,6 +15,4 @@
 
 
 2. Which things could be done better, than you’ve done it? After third reservation api call and
-   > result will success then user can not know what to do or what will happened. So I have implement a bottom sheet view which will show after reservation successfully done and back to the previous screen.
-   > Reservation data will store locally,
-   > if user click on the dismiss button on bottom sheet then data data will remove.
+   > result will success then user can not know what to do or what will happened. So I have implement a bottom sheet view which will show after reservation successfully done and back to the previous screen. 1 > Reservation data will store locally, 2 > if user click on the dismiss button on bottom sheet then data data will remove.
