@@ -252,8 +252,6 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             val dialog = BottomSheetDialog(requireContext())
             val bottomSheetBinding = BottomSheetDialogBinding.inflate(layoutInflater)
 
-
-
             bottomSheetBinding.carIdTv.text = "Car Id: ${response?.carId}"
             bottomSheetBinding.reservationIdTv.text =
                 "reservation Id:  ${response?.reservationId}"
