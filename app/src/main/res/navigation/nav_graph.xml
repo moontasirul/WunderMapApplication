@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/carsFragment"
         android:name="com.moon.map_application.ui.carList.CarFragment"
-        android:label="Cars"
+        android:label="Wunder App"
         tools:layout="@layout/fragment_car">
         <action
             android:id="@+id/action_carsFragment_to_carDetailFragment"

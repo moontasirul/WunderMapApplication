@@ -1,4 +1,4 @@
-package com.moon.map_application.data.remote
+package com.moon.map_application.data.remote.apiService
 
 import com.example.example.QuickRentalResponse
 import com.moon.map_application.data.model.QuickRentalRequest

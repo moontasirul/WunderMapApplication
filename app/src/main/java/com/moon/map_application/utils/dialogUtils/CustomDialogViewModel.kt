@@ -6,7 +6,8 @@ import com.moon.map_application.ui.base.BaseViewModel
 class CustomDialogViewModel : BaseViewModel<IDialogNavigation>() {
 
     var dialogTitle = ObservableField<String>()
-    var moreInfoBtnText = ObservableField<String>()
+    var dialogMessage = ObservableField<String>()
+    var positiveBtnText = ObservableField<String>()
     var closeBtnText = ObservableField<String>()
 
     fun onNext() {

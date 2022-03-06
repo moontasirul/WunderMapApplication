@@ -1,6 +1,5 @@
-package com.moon.map_application.data.remote
+package com.moon.map_application.data.remote.dataSource.baseDataSource
 
-import com.moon.map_application.data.model.Car
 import com.moon.map_application.utils.Resource
 import retrofit2.Response
 

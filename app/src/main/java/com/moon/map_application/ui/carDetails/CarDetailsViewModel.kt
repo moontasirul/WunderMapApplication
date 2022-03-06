@@ -153,10 +153,12 @@ class CarDetailsViewModel @Inject constructor(
                         AppEnum.API_CALL_STATUS.SUCCESS.name -> {
                             response.data?.let {
                                 isLoading.set(false)
+                                navigator.showSuccessDialog()
                             }
                         }
                         AppEnum.API_CALL_STATUS.ERROR.name -> {
                             isLoading.set(false)
+                            navigator.showFailedDialog()
                             print(response.message)
                         }
                         AppEnum.API_CALL_STATUS.LOADING.name -> {

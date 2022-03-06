@@ -4,9 +4,9 @@ import com.example.example.QuickRentalResponse
 import com.moon.map_application.data.model.Car
 import com.moon.map_application.data.model.CarInfo
 import com.moon.map_application.data.model.QuickRentalRequest
-import com.moon.map_application.data.remote.BaseDataSource
-import com.moon.map_application.data.remote.CarRemoteDataSource
-import com.moon.map_application.data.remote.ReservationDataSource
+import com.moon.map_application.data.remote.dataSource.CarRemoteDataSource
+import com.moon.map_application.data.remote.dataSource.ReservationDataSource
+import com.moon.map_application.data.remote.dataSource.baseDataSource.BaseDataSource
 import com.moon.map_application.utils.Resource
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class AppRepository @Inject constructor(
     private var carDataSource: CarRemoteDataSource,
     private var reservationDataSource: ReservationDataSource
-):BaseDataSource() {
+) : BaseDataSource() {
 
     suspend fun getCar(): Flow<Resource<Car>> {
         return flow {

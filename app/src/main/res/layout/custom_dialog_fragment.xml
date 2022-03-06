@@ -21,13 +21,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/dialogTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:text="@={dialogViewModel.dialogTitle}"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/dialogMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={dialogViewModel.dialogMessage}"
                 android:textAlignment="center" />
 
             <LinearLayout
@@ -52,7 +60,7 @@
                     android:visibility="gone" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/moreInfoButton"
+                    android:id="@+id/positiveButton"
                     style="@style/PositiveButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +69,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:onClick="@{() -> dialogViewModel.onPositive()}"
-                    android:text="@={dialogViewModel.moreInfoBtnText}"
+                    android:text="@={dialogViewModel.positiveBtnText}"
                     android:textAlignment="center" />
 
                 <com.google.android.material.button.MaterialButton

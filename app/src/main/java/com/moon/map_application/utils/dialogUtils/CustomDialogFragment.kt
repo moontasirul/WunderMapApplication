@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.moon.map_application.databinding.CustomDialogFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CustomDialogFragment(
+    var title: String,
     var message: String,
     var positiveButtonText: String,
     var negativeButtonText: String,
@@ -20,9 +22,6 @@ class CustomDialogFragment(
     private lateinit var customDialogFragmentBinding: CustomDialogFragmentBinding
     private val viewModel by viewModels<CustomDialogViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +29,6 @@ class CustomDialogFragment(
     ): View {
         // Inflate the layout for this fragment
         customDialogFragmentBinding = CustomDialogFragmentBinding.inflate(layoutInflater)
-        //return inflater.inflate(R.layout.custom_dialog_fragment, container, false)
         customDialogFragmentBinding.lifecycleOwner = this
         customDialogFragmentBinding.dialogViewModel = viewModel
         return customDialogFragmentBinding.root
@@ -39,10 +37,11 @@ class CustomDialogFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.setNavigator(this)
-        viewModel.dialogTitle.set(message)
+        viewModel.dialogTitle.set(title)
+        viewModel.dialogMessage.set(message)
 
         customDialogFragmentBinding.navigateButton.visibility = View.GONE
-        viewModel.moreInfoBtnText.set(positiveButtonText)
+        viewModel.positiveBtnText.set(positiveButtonText)
         viewModel.closeBtnText.set(negativeButtonText)
 
 
@@ -57,6 +56,7 @@ class CustomDialogFragment(
 
     override fun onPositive() {
         customDialogFragmentBinding.closeButton.visibility = View.GONE
+        callback.onPositiveClick()
     }
 
     override fun onCancel() {

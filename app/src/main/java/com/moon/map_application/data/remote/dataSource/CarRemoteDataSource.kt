@@ -1,5 +1,7 @@
-package com.moon.map_application.data.remote
+package com.moon.map_application.data.remote.dataSource
 
+import com.moon.map_application.data.remote.apiService.ICarService
+import com.moon.map_application.data.remote.dataSource.baseDataSource.BaseDataSource
 import javax.inject.Inject
 
 class CarRemoteDataSource  @Inject constructor(

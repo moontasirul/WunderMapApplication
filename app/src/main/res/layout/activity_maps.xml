@@ -7,6 +7,23 @@
     tools:context=".ui.MainActivity"
     android:orientation="vertical">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#BDCD5A" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
