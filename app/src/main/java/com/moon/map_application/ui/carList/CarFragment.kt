@@ -278,14 +278,13 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 "endTime:  ${response?.endTime?.toLong()?.let { Date(it) }}"
 
             bottomSheetBinding.idBtnDismiss.setOnClickListener {
-                //dialog.dismiss()
-
-
-                dialog.setCancelable(true)
-                dialog.setContentView(bottomSheetBinding.root)
-                dialog.show()
-
+                dialog.dismiss()
             }
+            dialog.setCancelable(true)
+            dialog.setContentView(bottomSheetBinding.root)
+            dialog.show()
+
         }
     }
+
 }
