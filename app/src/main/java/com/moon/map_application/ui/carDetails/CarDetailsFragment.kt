@@ -13,9 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CarDetailsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CarDetailsFragment()
-    }
 
     private lateinit var carDetailsBinding: FragmentCarDetailsBinding
     private val viewModel by viewModels<CarDetailsViewModel>()

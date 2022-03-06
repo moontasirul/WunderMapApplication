@@ -32,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     companion object {
-        fun newInstance() = CarFragment()
+        private var REQUEST_CODE = 101
     }
 
     private lateinit var carBinding: FragmentCarBinding
@@ -42,7 +42,7 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     private lateinit var currentLocation: Location
 
-    private var REQUEST_CODE = 101
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
