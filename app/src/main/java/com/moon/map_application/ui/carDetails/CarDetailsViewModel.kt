@@ -56,7 +56,28 @@ class CarDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getCarData(carInfo: CarInfo) {
+    fun getCarData(carInfo: Resource<CarInfo>) {
+        when (carInfo.status.name) {
+            "SUCCESS" -> {
+                carInfo.data?.let {
+                    print(it)
+                    isLoading.set(false)
+                    prepareUI(it)
+                }
+            }
+            "ERROR" -> {
+                isLoading.set(false)
+                print(carInfo.message)
+            }
+            "LOADING" -> {
+                isLoading.set(true)
+                print(carInfo.message)
+            }
+        }
+
+    }
+
+    private fun prepareUI(carInfo: CarInfo) {
         carInfo.carId?.let {
             carId.value = it
         }

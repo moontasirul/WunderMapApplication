@@ -45,23 +45,7 @@ class CarDetailsFragment : Fragment() {
         viewModel.isLoading.set(true)
         viewModel.fetchCarDetails()
         viewModel.response.observe(viewLifecycleOwner, Observer { response ->
-            when (response.status.name) {
-                "SUCCESS" -> {
-                    response.data?.let {
-                        print(it)
-                        viewModel.isLoading.set(false)
-                        viewModel.getCarData(it)
-                    }
-                }
-                "ERROR" -> {
-                    viewModel.isLoading.set(false)
-                    print(response.message)
-                }
-                "LOADING" -> {
-                    viewModel.isLoading.set(true)
-                    print(response.message)
-                }
-            }
+            viewModel.getCarData(response)
         })
     }
 
