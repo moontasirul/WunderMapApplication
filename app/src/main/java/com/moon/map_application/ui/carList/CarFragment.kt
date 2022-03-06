@@ -1,4 +1,4 @@
-package com.moon.map_application.ui
+package com.moon.map_application.ui.carList
 
 import android.Manifest
 import android.content.pm.PackageManager

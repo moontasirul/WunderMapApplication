@@ -1,4 +1,4 @@
-package com.moon.map_application.ui
+package com.moon.map_application.ui.carList
 
 import com.moon.map_application.ui.base.IBaseNavigator
 

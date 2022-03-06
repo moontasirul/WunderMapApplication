@@ -1,4 +1,4 @@
-package com.moon.map_application.ui
+package com.moon.map_application.ui.carList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
