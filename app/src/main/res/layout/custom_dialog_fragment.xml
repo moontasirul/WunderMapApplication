@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".utils.dialogUtils.CustomDialogFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="dialogViewModel"
+            type="com.moon.map_application.utils.dialogUtils.CustomDialogViewModel" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/dialogTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={dialogViewModel.dialogTitle}"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/navigateButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/btn_text_next"
+                    android:onClick="@{() -> dialogViewModel.onNext()}"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/moreInfoButton"
+                    style="@style/PositiveButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> dialogViewModel.onPositive()}"
+                    android:text="@={dialogViewModel.moreInfoBtnText}"
+                    android:textAlignment="center" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/closeButton"
+                    style="@style/DarkButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> dialogViewModel.onCancel()}"
+                    android:text="@={dialogViewModel.closeBtnText}"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

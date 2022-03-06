@@ -7,6 +7,7 @@ import com.moon.map_application.data.model.CarInfo
 import com.moon.map_application.data.model.QuickRentalRequest
 import com.moon.map_application.data.repository.AppRepository
 import com.moon.map_application.ui.base.BaseViewModel
+import com.moon.map_application.utils.AppEnum
 import com.moon.map_application.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -16,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CarDetailsViewModel @Inject constructor(
     private val repository: AppRepository
-) : BaseViewModel() {
+) : BaseViewModel<ICarDetailsNavigator>() {
 
     private val carId = MutableLiveData<Int>()
     var carTitle = MutableLiveData<String>()
@@ -58,18 +59,18 @@ class CarDetailsViewModel @Inject constructor(
 
     fun getCarData(carInfo: Resource<CarInfo>) {
         when (carInfo.status.name) {
-            "SUCCESS" -> {
+            AppEnum.API_CALL_STATUS.SUCCESS.name -> {
                 carInfo.data?.let {
                     print(it)
                     isLoading.set(false)
                     prepareUI(it)
                 }
             }
-            "ERROR" -> {
+            AppEnum.API_CALL_STATUS.ERROR.name -> {
                 isLoading.set(false)
                 print(carInfo.message)
             }
-            "LOADING" -> {
+            AppEnum.API_CALL_STATUS.LOADING.name -> {
                 isLoading.set(true)
                 print(carInfo.message)
             }
@@ -148,21 +149,18 @@ class CarDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             carId.value?.let {
                 repository.setQuickRentalReservation(QuickRentalRequest(it)).collect { response ->
-                    print(response)
                     when (response.status.name) {
-                        "SUCCESS" -> {
+                        AppEnum.API_CALL_STATUS.SUCCESS.name -> {
                             response.data?.let {
-                                print(it)
                                 isLoading.set(false)
                             }
                         }
-                        "ERROR" -> {
+                        AppEnum.API_CALL_STATUS.ERROR.name -> {
                             isLoading.set(false)
                             print(response.message)
                         }
-                        "LOADING" -> {
+                        AppEnum.API_CALL_STATUS.LOADING.name -> {
                             isLoading.set(true)
-                            print(response.message)
                         }
                     }
                 }

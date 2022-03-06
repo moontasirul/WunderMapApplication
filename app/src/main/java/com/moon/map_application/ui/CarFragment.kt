@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -26,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.moon.map_application.R
 import com.moon.map_application.data.model.CarItem
 import com.moon.map_application.databinding.FragmentCarBinding
+import com.moon.map_application.utils.AppEnum.API_CALL_STATUS
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,7 +48,6 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         savedInstanceState: Bundle?
     ): View {
         carBinding = FragmentCarBinding.inflate(layoutInflater)
-        // inflater.inflate(R.layout.fragment_car, container, false)
         return carBinding.root
     }
 
@@ -123,16 +122,16 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         viewModel.fetchCarResponse()
         viewModel.response.observe(requireActivity()) { response ->
             when (response.status.name) {
-                "SUCCESS" -> {
+                API_CALL_STATUS.SUCCESS.name -> {
                     response.data?.let {
                         viewModel.carList.addAll(it)
                     }
                     addCarMarker()
                 }
-                "ERROR" -> {
+                API_CALL_STATUS.ERROR.name -> {
                     print(response.message)
                 }
-                "LOADING" -> {
+                API_CALL_STATUS.LOADING.name -> {
                     print(response.message)
                 }
             }
@@ -159,11 +158,6 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
         // Check if a click count was set, then display the click count.
         clickCount?.let {
-            Toast.makeText(
-                requireContext(),
-                "${it.title} has been clicked.",
-                Toast.LENGTH_SHORT
-            ).show()
             it.carId?.let { it1 -> onClickedCar(it1) }
         }
 
@@ -173,7 +167,7 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         return false
     }
 
-    fun onClickedCar(carId: Int) {
+    private fun onClickedCar(carId: Int) {
         findNavController().navigate(
             R.id.action_carsFragment_to_carDetailFragment,
             bundleOf("id" to carId)

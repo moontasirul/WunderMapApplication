@@ -6,6 +6,5 @@ class ApiEndPoint {
         const val BASE_URL_FOR_RESERVATION =
             "https://4i96gtjfia.execute-api.eu-central-1.amazonaws.com/"
         const val CAR_LIST_API = "cars.json"
-        const val CAR_INTO_APR = "cars/{id}"
     }
 }

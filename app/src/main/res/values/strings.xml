@@ -2,4 +2,9 @@
     <string name="app_name">map_application</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="btn_text_quick_rent">quick-rent</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_text_close">Close</string>
+    <string name="btn_text_ok">Ok</string>
+    <string name="btn_text_next">Next</string>
 </resources>

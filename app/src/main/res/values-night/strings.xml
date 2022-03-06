@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="btn_text_quick_rent">quick-rent</string>
+    <string name="btn_text_close">Close</string>
+    <string name="btn_text_ok">Ok</string>
+    <string name="btn_text_next">Next</string>
 </resources>

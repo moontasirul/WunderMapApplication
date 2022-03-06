@@ -13,4 +13,22 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="PositiveButton">
+        <item name="backgroundTint">@color/colorAccent</item>
+        <item name="elevation">16dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="DarkButton">
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:textColor">@color/lightGrey</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
 </resources>
