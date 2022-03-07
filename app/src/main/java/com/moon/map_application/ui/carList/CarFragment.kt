@@ -2,13 +2,18 @@ package com.moon.map_application.ui.carList
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
+import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -65,14 +70,29 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         return carBinding.root
     }
 
+    private val requestPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                fetchLocation()
+                setupObservers()
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.setNavigator(this)
         fusedLocationClient = LocationServices
             .getFusedLocationProviderClient(requireContext())
-        fetchLocation()
-        setupObservers()
+        if (Utils.hasInternetConnection(requireContext())) {
+            fetchLocation()
+            setupObservers()
+        } else {
+            showDialog(
+                requireContext().getString(R.string.msg_failed),
+                "Please Active Internet Connection",
+                true
+            )
+        }
     }
 
     private fun fetchLocation() {
@@ -88,6 +108,7 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                     REQUEST_CODE
                 )
+                requireContext().checkBackgroundLocationPermissionAPI30()
                 return
             }
         }
@@ -110,6 +131,30 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             )
         }
 
+    }
+
+    private fun Context.checkSinglePermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    @TargetApi(30)
+    private fun Context.checkBackgroundLocationPermissionAPI30() {
+
+        if (checkSinglePermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) return
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.location_permission))
+            .setMessage(getString(R.string.location_permission_message))
+            .setPositiveButton(getString(R.string.yes_txt)) { _, _ ->
+                requestPermission.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            }
+            .setNegativeButton(getString(R.string.btn_text_no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
 
@@ -136,6 +181,7 @@ class CarFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         when (requestCode) {
             REQUEST_CODE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 fetchLocation()
+                setupObservers()
             }
         }
     }

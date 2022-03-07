@@ -12,4 +12,7 @@
     <string name="msg_failed_title">Sorry..!</string>
     <string name="msg_failed">Reservation is unsuccessful</string>
     <string name="dismiss_dialog_txt">Dismiss dialog</string>
+    <string name="location_permission">Allow Location Permission</string>
+    <string name="location_permission_message">Update location permission from setting</string>
+    <string name="btn_text_no">No</string>
 </resources>

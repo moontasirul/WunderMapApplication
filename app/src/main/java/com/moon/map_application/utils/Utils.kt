@@ -5,18 +5,21 @@ import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.core.location.LocationManagerCompat
 
 object Utils {
-    @RequiresApi(Build.VERSION_CODES.M)
+
     fun hasInternetConnection(context: Context?): Boolean {
         if (context == null)
             return false
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
                 as ConnectivityManager
 
-        val activeNetwork = connectivityManager.activeNetwork ?: return false
+        val activeNetwork = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            connectivityManager.activeNetwork ?: return false
+        } else {
+            return false
+        }
         val networkCapabilities =
             connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
 
